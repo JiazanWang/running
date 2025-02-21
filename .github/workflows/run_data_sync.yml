@@ -6,7 +6,7 @@ on:
     - cron: '0 0 * * *'
   push:
     branches:
-      - main
+      - master
     paths:
       - run_page/nike_sync.py
       - run_page/nike_to_strava_sync.py
@@ -249,6 +249,10 @@ jobs:
           echo "SAVE_DATA_IN_GITHUB_CACHE=$SAVE_DATA_IN_GITHUB_CACHE" >> "$GITHUB_OUTPUT"
           echo "DATA_CACHE_PREFIX=$DATA_CACHE_PREFIX" >> "$GITHUB_OUTPUT"
           echo "BUILD_GH_PAGES=$BUILD_GH_PAGES" >> "$GITHUB_OUTPUT"
+      # 添加触发 Vercel 部署的步骤
+      - name: Trigger Vercel Deployment
+        run: |
+          curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_tWF7AvPwDc6KuAtx9QhyHmltubAe/kw0rJVzFxS
 
   publish_github_pages:
     if: needs.sync.result == 'success' && needs.sync.outputs.BUILD_GH_PAGES == 'true'
