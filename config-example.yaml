@@ -1,0 +1,8 @@
+# Copy this file to `config.yaml` and set the configuration items
+
+sync:
+  coros:
+    authentication_domain: CN #  Global (default) | CN (Mainland China)
+    email: 
+    password: 
+
